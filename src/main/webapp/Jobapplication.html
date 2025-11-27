@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Job Application - Recovery Reconnection Platform</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .homepage-container {
+    background: rgb(120, 209, 126);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .homepage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  .homepage-header h1 {
+    margin: 0;
+  }
+  .homepage-header h1 a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+  .homepage-header h1 a img {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 80px;
+    height: auto;
+  }
+  .homepage-header nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .homepage-header nav a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+  }
+  .search-bar input[type="text"] {
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    width: 300px;
+    background: url('search.jpg') no-repeat scroll 10px center;
+    background-size: 1rem;
+    padding-left: 35px;
+  }
+  .search-bar button {
+    display: none;
+  }
+  .job-listing {
+    margin-bottom: 2rem;
+  }
+  .job-listing h2 {
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  .job-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .job-item:last-child {
+    border-bottom: none;
+  }
+  .job-item h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .job-item p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+  .job-item button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .job-item button:hover {
+    background-color: #218838;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 60px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 5% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    border-radius: 10px;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .form-group {
+    margin-bottom: 1rem;
+  }
+  .form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  .form-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .form-row .form-group {
+    flex: 0 0 48%;
+  }
+  .form-group input[type="text"],
+  .form-group input[type="file"] {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .form-group button {
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .form-group button:hover {
+    background-color: #218838;
+  }
+</style>
+</head>
+<body>
+  <div class="homepage-container">
+    <header class="homepage-header">
+      <h1><a href="index.html"><img src="Logo.jpg" alt="Logo" />Homepage</a></h1>
+      <nav>
+        <a href="myprofile.html">My Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>Available Job Postings</h1>
+      <div class="search-bar">
+        <input type="text" id="job-search" placeholder="Search Jobs..">
+      </div>
+    </div>
+    <div class="job-listing" id="job-listing">
+      <div class="job-item" data-job-title="Software Developer">
+        <h3>JobTitle: Software Developer</h3>
+        <p>Company Name: Tech Solutions</p>
+        <p>Location: New York, NY</p>
+        <p>Employment Type: Full-time</p>
+        <p>Salary Range: $70,000 - $90,000</p>
+        <p>Job Description: Develop and maintain software applications.</p>
+        <p>Application Date: 2024-07-10</p>
+        <p>Contact Email: jobs@techsolutions.com</p>
+        <p>Contact Phone: (123) 456-7890</p>
+        <button class="apply-button" data-job-id="168464">Apply Now</button>
+      </div>
+      <div class="job-item" data-job-title="Graphic Designer">
+        <h3>JobTitle: Graphic Designer</h3>
+        <p>Company Name: Creative Inc.</p>
+        <p>Location: Los Angeles, CA</p>
+        <p>Employment Type: Part-time</p>
+        <p>Salary Range: $50,000 - $70,000</p>
+        <p>Job Description: Design graphics for various media.</p>
+        <p>Application Date: 2024-07-15</p>
+        <p>Contact Email: jobs@creativeinc.com</p>
+        <p>Contact Phone: (987) 654-3210</p>
+        <button class="apply-button" data-job-id="154578">Apply Now</button>
+      </div>
+      <div class="job-item" data-job-title="Marketing Manager">
+        <h3>JobTitle: Marketing Manager</h3>
+        <p>Company Name: Marketing Pro</p>
+        <p>Location: Chicago, IL</p>
+        <p>Employment Type: Full-time</p>
+        <p>Salary Range: $80,000 - $100,000</p>
+        <p>Job Description: Oversee marketing campaigns and strategies.</p>
+        <p>Application Date: 2024-08-01</p>
+        <p>Contact Email: hr@marketingpro.com</p>
+        <p>Contact Phone: (555) 123-4567</p>
+        <button class="apply-button" data-job-id="376849">Apply Now</button>
+      </div>
+      <div class="job-item" data-job-title="Data Analyst">
+        <h3>JobTitle: Data Analyst</h3>
+        <p>Company Name: Data Insights</p>
+        <p>Location: San Francisco, CA</p>
+        <p>Employment Type: Part-time</p>
+        <p>Salary Range: $65,000 - $75,000</p>
+        <p>Job Description: Analyze and interpret complex data sets.</p>
+        <p>Application Date: 2024-08-05</p>
+        <p>Contact Email: careers@datainsights.com</p>
+        <p>Contact Phone: (321) 654-9870</p>
+        <button class="apply-button" data-job-id="465442">Apply Now</button>
+      </div><div class="job-item" data-job-title="Full Stack Developer">
+        <h3>JobTitle: Full Stack Developer</h3>
+        <p>Company Name: Info Insights</p>
+        <p>Location: Manchester, NH</p>
+        <p>Employment Type: Full-time</p>
+        <p>Salary Range: $95,000 - $125,000</p>
+        <p>Job Description: Create a website as the requirements in trendy. </p>
+        <p>Application Date: 2024-08-30</p>
+        <p>Contact Email: careers@infoinsights.com</p>
+        <p>Contact Phone: (321) 658-9871</p>
+        <button class="apply-button" data-job-id="465448">Apply Now</button>
+      </div>
+      <div class="job-item" data-job-title="HR Specialist">
+        <h3>JobTitle: HR Specialist</h3>
+        <p>Company Name: People First</p>
+        <p>Location: Austin, TX</p>
+        <p>Employment Type: Full-time</p>
+        <p>Salary Range: $60,000 - $80,000</p>
+        <p>Job Description: Manage recruitment and employee relations.</p>
+        <p>Application Date: 2024-07-25</p>
+        <p>Contact Email: jobs@peoplefirst.com</p>
+        <p>Contact Phone: (789) 456-1230</p>
+        <button class="apply-button" data-job-id="595289">Apply Now</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="application-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>Apply for Job</h2>
+      <div class="form-group">
+        <label for="job-id">Job ID:</label>
+        <input type="text" id="job-id" readonly />
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="first-name">First Name:</label>
+          <input type="text" id="first-name" />
+        </div>
+        <div class="form-group">
+          <label for="last-name">Last Name:</label>
+          <input type="text" id="last-name" />
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="resume">Upload Resume:</label>
+        <input type="file" id="resume" />
+      </div>
+      <div class="form-group">
+        <label for="cover-letter">Upload Cover Letter:</label>
+        <input type="file" id="cover-letter" />
+      </div>
+      <div class="form-group">
+        <button id="submit-application">Submit Application</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', (event) => {
+      const modal = document.getElementById("application-modal");
+      const closeModal = document.getElementsByClassName("close")[0];
+      const searchInput = document.getElementById("job-search");
+      const jobItems = document.querySelectorAll(".job-item");
+
+      document.querySelectorAll('.apply-button').forEach(button => {
+        button.addEventListener('click', (e) => {
+          const jobId = e.target.getAttribute('data-job-id');
+          document.getElementById('job-id').value = jobId;
+          modal.style.display = "block";
+        });
+      });
+
+      closeModal.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      document.getElementById('submit-application').addEventListener('click', () => {
+        const jobId = document.getElementById('job-id').value;
+        const firstName = document.getElementById('first-name').value;
+        const lastName = document.getElementById('last-name').value;
+        const resume = document.getElementById('resume').files[0];
+        const coverLetter = document.getElementById('cover-letter').files[0];
+
+        if (firstName && lastName && resume && coverLetter) {
+          alert('Job application submitted successfully!');
+          console.log(`Job ID: ${jobId}, First Name: ${firstName}, Last Name: ${lastName}, Resume: ${resume.name}, Cover Letter: ${coverLetter.name}`);
+          modal.style.display = "none";
+        } else {
+          alert('Please fill in all fields and upload both resume and cover letter.');
+        }
+      });
+
+      searchInput.addEventListener('input', () => {
+        const searchText = searchInput.value.toLowerCase();
+        jobItems.forEach(item => {
+          const jobTitle = item.getAttribute('data-job-title').toLowerCase();
+          if (jobTitle.includes(searchText)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

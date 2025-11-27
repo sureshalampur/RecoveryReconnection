@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Mentor - Recovery Reconnection Platform</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .homepage-container {
+    background: rgb(120, 209, 126);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .homepage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  .homepage-header h1 {
+    margin: 0;
+  }
+  .homepage-header h1 a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+  .homepage-header h1 a img {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 80px;
+    height: auto;
+  }
+  .homepage-header nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .homepage-header nav a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+  }
+  .mentor-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .mentor-item:last-child {
+    border-bottom: none;
+  }
+  .mentor-item img {
+    border-radius: 50%;
+    margin-bottom: 1rem;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+  }
+  .mentor-item div {
+    text-align: center;
+  }
+  .mentor-item h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  .mentor-item p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+  .button-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+  .connect-button, .appointment-button {
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 0 0.5rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  .connect-button:hover, .appointment-button:hover {
+    background-color: #218838;
+    color: #fff;
+  }
+  .connect-button::before, .appointment-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 300%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    transform: skewX(30deg);
+    transition: all 0.5s;
+  }
+  .connect-button:hover::before, .appointment-button:hover::before {
+    left: 100%;
+  }
+  .message-box, .appointment-box {
+    margin-top: 1rem;
+    display: none;
+    text-align: center;
+  }
+  .message-box textarea, .appointment-box input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+</style>
+</head>
+<body>
+  <div class="homepage-container">
+    <header class="homepage-header">
+      <h1><a href="index.html"><img src="Logo.jpg" alt="Logo" />Homepage</a></h1>
+      <nav>
+        <a href="myprofile.html">My Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>My Mentor</h1>
+    </div>
+    <div class="mentor-item" id="mentor-item">
+      <img src="mentor-profile.jpg" alt="John Smith's Profile Picture">
+      <div>
+        <h3>John Smith</h3>
+        <p><strong>ID:</strong> 15739</p>
+        <p><strong>Email:</strong> john.smith@reconnect.com</p>
+        <p><strong>Expertise:</strong> A seasoned career development mentor with over 10 years of experience in guiding individuals toward achieving their professional aspirations. Expert in providing personalized coaching, optimizing resumes, and preparing candidates for interviews. Specializes in career development strategies, professional branding, and job market navigation. Dedicated to empowering clients to reach their full potential through tailored advice, strategic planning, and unwavering support.</p>
+      </div>
+      <div class="button-container">
+        <button class="connect-button" id="connect-mentor">Send a Message</button>
+        <button class="appointment-button" id="make-appointment">Make an Appointment</button>
+      </div>
+      <div class="message-box" id="message-box">
+        <textarea id="message-content" rows="4" placeholder="Write your message here..."></textarea>
+        <button class="send-button" id="send-message">Send</button>
+      </div>
+      <div class="appointment-box" id="appointment-box">
+        <label for="appointment-date">Select Date:</label>
+        <input type="date" id="appointment-date">
+        <label for="appointment-time">Select Time:</label>
+        <input type="time" id="appointment-time">
+        <button class="send-button" id="confirm-appointment">Confirm</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('connect-mentor').addEventListener('click', () => {
+      document.getElementById('message-box').style.display = 'block';
+      document.getElementById('appointment-box').style.display = 'none';
+    });
+
+    document.getElementById('send-message').addEventListener('click', () => {
+      const messageContent = document.getElementById('message-content').value;
+      if (messageContent.trim() !== '') {
+        alert('Message successfully sent!');
+        document.getElementById('message-content').value = '';
+        document.getElementById('message-box').style.display = 'none';
+      } else {
+        alert('Please write a message before sending.');
+      }
+    });
+
+    document.getElementById('make-appointment').addEventListener('click', () => {
+      document.getElementById('appointment-box').style.display = 'block';
+      document.getElementById('message-box').style.display = 'none';
+    });
+
+    document.getElementById('confirm-appointment').addEventListener('click', () => {
+      const appointmentDate = document.getElementById('appointment-date').value;
+      const appointmentTime = document.getElementById('appointment-time').value;
+      if (appointmentDate && appointmentTime) {
+        alert(`Appointment successfully scheduled for ${appointmentDate} at ${appointmentTime}!`);
+        document.getElementById('appointment-box').style.display = 'none';
+      } else {
+        alert('Please select both date and time for the appointment.');
+      }
+    });
+  </script>
+</body>
+</html>

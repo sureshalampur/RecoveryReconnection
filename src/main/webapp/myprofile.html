@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Profile - Recovery Reconnection Platform</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .dashboard-container {
+    background: rgb(120, 209, 126);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  .dashboard-header h1 {
+    margin: 0;
+  }
+  .dashboard-header h1 a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+  .dashboard-header h1 a img {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 80px;
+    height: auto;
+  }
+  .dashboard-header nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .dashboard-header nav a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .profile-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+  }
+  .profile-section img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  .profile-section h2 {
+    margin: 0.5rem 0;
+  }
+  .profile-section p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+  .profile-section input {
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 80%;
+    max-width: 300px;
+  }
+  .button {
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1><a href="index.html"><img src="Logo.jpg" alt="Logo" />Dashboard</a></h1>
+      <nav>
+        <a href="myprofile.html">My Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="profile-section">
+      <img src="profile.jpg" alt="Profile Picture">
+      <h2 id="name">John Bose</h2>
+      <p>ID: <span id="id">19345</span></p>
+      <p>Email: <span id="email">johnbose@gmail.com</span></p>
+      <p>First Name: <span id="firstName">John</span></p>
+      <p>Last Name: <span id="lastName">Bose</span></p>
+      <p>Date of Birth: <span id="dob">1990-01-01</span></p>
+      <p>Password: <span id="password">****</span></p>
+      <button class="button" id="editButton">Edit</button>
+      <button class="button" id="saveButton" style="display: none;">Save</button>
+    </div>
+  </div>
+
+  <script>
+    function enableEditMode() {
+      const email = document.getElementById('email').innerText;
+      const firstName = document.getElementById('firstName').innerText;
+      const lastName = document.getElementById('lastName').innerText;
+      const dob = document.getElementById('dob').innerText;
+      const password = '****';
+
+      document.querySelector('.profile-section').innerHTML = `
+        <img src="profile.jpg" alt="Profile Picture">
+        <h2 id="name">John Bose</h2>
+        <p>ID: <span id="id">19345</span></p>
+        <p>Email: <input type="text" id="emailInput" value="${email}"></p>
+        <p>First Name: <input type="text" id="firstNameInput" value="${firstName}"></p>
+        <p>Last Name: <input type="text" id="lastNameInput" value="${lastName}"></p>
+        <p>Date of Birth: <input type="date" id="dobInput" value="${dob}"></p>
+        <p>Password: <input type="password" id="passwordInput" value="${password}"></p>
+        <button class="button" id="saveButton">Save</button>
+      `;
+
+      document.getElementById('saveButton').addEventListener('click', saveProfile);
+    }
+
+    function saveProfile() {
+      const email = document.getElementById('emailInput').value;
+      const firstName = document.getElementById('firstNameInput').value;
+      const lastName = document.getElementById('lastNameInput').value;
+      const dob = document.getElementById('dobInput').value;
+
+      document.querySelector('.profile-section').innerHTML = `
+        <img src="profile.jpg" alt="Profile Picture">
+        <h2 id="name">${firstName} ${lastName}</h2>
+        <p>ID: <span id="id">19345</span></p>
+        <p>Email: <span id="email">${email}</span></p>
+        <p>First Name: <span id="firstName">${firstName}</span></p>
+        <p>Last Name: <span id="lastName">${lastName}</span></p>
+        <p>Date of Birth: <span id="dob">${dob}</span></p>
+        <p>Password: <span id="password">****</span></p>
+        <button class="button" id="editButton">Edit</button>
+      `;
+
+      document.getElementById('editButton').addEventListener('click', enableEditMode);
+    }
+
+    document.getElementById('editButton').addEventListener('click', enableEditMode);
+  </script>
+</body>
+</html>

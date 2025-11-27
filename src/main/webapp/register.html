@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register - Recovery_Reconnection</title>
+<style>
+  body {
+    font-family: 'Times New Roman', sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  .logo {
+    position: absolute;
+    top: 20px;
+    left: 40px;
+    width: 500px;
+    height: 500px;
+    background: url('Logo.jpg') no-repeat left center;
+    transform: translateY(120px);
+    background-size: contain;
+  }
+  .register-container {
+    background: rgb(255, 255, 255);
+    background-size: cover;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    transform: translateX(300px);
+  }
+  .register-form input {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+  }
+  .register-form button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #27ae60;
+    color: white;
+    cursor: pointer;
+  }
+  .register-form button:hover {
+    background-color: #229954;
+  }
+  .register-form .login {
+    text-align: center;
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+  <div class="logo"></div>
+  <div class="register-container">
+    <h2>Create an Account</h2>
+    <form class="register-form">
+      <input type="text" placeholder="First Name" required>
+      <input type="text" placeholder="Last Name" required>
+      <input type="text" id="dob" placeholder="Date of Birth" required>
+      <input type="email" placeholder="Email" required>
+      <input type="password" placeholder="Password" required>
+      <button type="submit">Register</button>
+      <p class="login">Already have an account? <a href="login.html">Login here</a></p>
+    </form>
+  </div>
+  <script>
+    const dobInput = document.getElementById('dob');
+
+    dobInput.addEventListener('focus', function() {
+      dobInput.type = 'date';
+      dobInput.placeholder = 'Date of Birth';
+    });
+
+    dobInput.addEventListener('blur', function() {
+      if (!dobInput.value) {
+        dobInput.type = 'text';
+        dobInput.placeholder = 'Date of Birth';
+      }
+    });
+  </script>
+</body>
+</html>

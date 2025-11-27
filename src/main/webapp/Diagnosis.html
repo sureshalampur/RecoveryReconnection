@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diagnosis - Recovery Reconnection Platform</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .dashboard-container {
+    background: rgb(120, 209, 126);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  .dashboard-header h1 {
+    margin: 0;
+  }
+  .dashboard-header h1 a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+  .dashboard-header h1 a img {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 80px;
+    height: auto;
+  }
+  .dashboard-header nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .dashboard-header nav a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+  }
+  .tabs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 2rem;
+  }
+  .tabs button {
+    padding: 1rem;
+    border: none;
+    border-bottom: 2px solid transparent;
+    background: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    transition: border-bottom 0.3s ease;
+  }
+  .tabs button:hover {
+    border-bottom: 2px solid #007bff;
+  }
+  .tabs button.active {
+    border-bottom: 2px solid #007bff;
+  }
+  .tab-content {
+    display: none;
+  }
+  .tab-content.active {
+    display: block;
+  }
+  .info-section {
+    margin-bottom: 1rem;
+  }
+  .info-section h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .info-section p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+  .diagnosis-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .diagnosis-item:last-child {
+    border-bottom: none;
+  }
+  .diagnosis-item h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .diagnosis-item p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+  .diagnosis-item button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .diagnosis-item button:hover {
+    background-color: #218838;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #program-button {
+    display: block;
+    margin: 1rem auto;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  #program-button:hover {
+    background-color: #0056b3;
+  }
+</style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1><a href="index.html"><img src="Logo.jpg" alt="Logo" />Homepage</a></h1>
+      <nav>
+        <a href="myprofile.html">My Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>Diagnosis and Treatment Program</h1>
+    </div>
+    <div class="tabs">
+      <button class="tab-link active" data-tab="diagnosis-tab">Diagnosis</button>
+      <button class="tab-link" data-tab="treatment-tab">Treatment Program</button>
+      <button class="tab-link" data-tab="program-tab">Program Details</button>
+    </div>
+    <div id="diagnosis-tab" class="tab-content active">
+      <div class="diagnosis-info">
+        <div class="info-section">
+          <h3>Diagnosis:</h3>
+          <p>Substance Addiction and Mental Health Disorder</p>
+        </div>
+        <div class="info-section">
+          <h3>Patient ID:</h3>
+          <p>19345</p>
+        </div>
+        <div class="info-section">
+          <h3>Application Date:</h3>
+          <p>2024-07-25</p>
+        </div>
+        <div class="info-section">
+          <h3>Status:</h3>
+          <p>In Progress</p>
+        </div>
+      </div>
+    </div>
+    <div id="treatment-tab" class="tab-content">
+      <div class="treatment-info">
+        <div class="info-section">
+          <h3>Program ID:</h3>
+          <p>63894</p>
+        </div>
+        <div class="info-section">
+          <h3>Diagnosis ID:</h3>
+          <p>74538</p>
+        </div>
+        <div class="info-section">
+          <h3>Start Date:</h3>
+          <p>2024-07-01</p>
+        </div>
+        <div class="info-section">
+          <h3>End Date:</h3>
+          <p>2024-12-01</p>
+        </div>
+      </div>
+    </div>
+    <div id="program-tab" class="tab-content">
+      <div class="diagnosis-item" data-diagnosis-id="3">
+        <h3>Comprehensive Treatment Program</h3>
+        <p>Description: A program that includes both substance addiction and mental health disorder treatments.</p>
+        <button id="program-button" data-diagnosis-id="3">View Program</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="diagnosis-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="diagnosis-title"></h2>
+      <p id="diagnosis-description"></p>
+      <div id="diagnosis-content"></div>
+    </div>
+  </div>
+
+  <div id="program-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="program-title"></h2>
+      <p id="program-description"></p>
+      <div id="program-content"></div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const tabLinks = document.querySelectorAll('.tab-link');
+      const tabContents = document.querySelectorAll('.tab-content');
+      const diagnosisItems = document.querySelectorAll('.diagnosis-item');
+      const diagnosisModal = document.getElementById('diagnosis-modal');
+      const programModal = document.getElementById('program-modal');
+      const closeModal = document.getElementsByClassName('close');
+      const diagnosisTitle = document.getElementById('diagnosis-title');
+      const diagnosisDescription = document.getElementById('diagnosis-description');
+      const diagnosisContent = document.getElementById('diagnosis-content');
+      const programTitle = document.getElementById('program-title');
+      const programDescription = document.getElementById('program-description');
+      const programContent = document.getElementById('program-content');
+
+      tabLinks.forEach(tab => {
+        tab.addEventListener('click', () => {
+          tabLinks.forEach(link => link.classList.remove('active'));
+          tab.classList.add('active');
+
+          const target = tab.getAttribute('data-tab');
+          tabContents.forEach(content => {
+            content.id === target ? content.classList.add('active') : content.classList.remove('active');
+          });
+        });
+      });
+
+      const diagnoses = [
+        {
+          id: 1,
+          title: 'Substance Addiction Treatment',
+          description: 'Detailed information about substance addiction treatment.',
+          content: `
+            <p>This program focuses on treating substance addiction through a combination of detoxification, counseling, and support groups. The goal is to help individuals overcome their addiction and maintain long-term sobriety.</p>
+            <p><strong>Therapy Approaches:</strong> Detoxification, Counseling, Support Groups, Medication-Assisted Treatment.</p>
+            <p><strong>Benefits:</strong> Reduced substance dependency, improved mental health, better coping strategies, and enhanced quality of life.</p>
+          `
+        },
+        {
+          id: 2,
+          title: 'Mental Health Disorder Treatment',
+          description: 'Detailed information about mental health disorder treatment.',
+          content: `
+            <p>This program provides comprehensive treatment for various mental health disorders, including anxiety, depression, and bipolar disorder. It includes therapy sessions, medication management, and lifestyle changes to improve mental health.</p>
+            <p><strong>Therapy Approaches:</strong> Cognitive Behavioral Therapy (CBT), Group Therapy, Individual Counseling, Medication Management.</p>
+            <p><strong>Benefits:</strong> Improved mental health, reduced symptoms of mental health disorders, better coping strategies, and enhanced support network.</p>
+          `
+        },
+        {
+          id: 3,
+          title: 'Comprehensive Treatment Program',
+          description: 'A program that includes both substance addiction and mental health disorder treatments.',
+          content: `
+            <p>This comprehensive program addresses both substance addiction and mental health disorders through an integrated approach. It combines various therapies to provide holistic treatment and support for individuals.</p>
+            <p><strong>Therapy Approaches:</strong> Cognitive Behavioral Therapy (CBT), Group Therapy, Individual Counseling, Medication Management.</p>
+            <p><strong>Benefits:</strong> Improved mental health, reduced substance dependency, better coping strategies, enhanced support network.</p>
+          `
+        }
+      ];
+
+      diagnosisItems.forEach(item => {
+        item.querySelector('.view-button')?.addEventListener('click', () => {
+          const diagnosisId = item.querySelector('.view-button').getAttribute('data-diagnosis-id');
+          const diagnosis = diagnoses.find(d => d.id == diagnosisId);
+
+          diagnosisTitle.innerHTML = diagnosis.title;
+          diagnosisDescription.innerHTML = diagnosis.description;
+          diagnosisContent.innerHTML = diagnosis.content;
+          diagnosisModal.style.display = 'block';
+        });
+
+        item.querySelector('#program-button')?.addEventListener('click', () => {
+          const diagnosisId = item.querySelector('#program-button').getAttribute('data-diagnosis-id');
+          const diagnosis = diagnoses.find(d => d.id == diagnosisId);
+
+          programTitle.innerHTML = diagnosis.title;
+          programDescription.innerHTML = diagnosis.description;
+          programContent.innerHTML = diagnosis.content;
+          programModal.style.display = 'block';
+        });
+      });
+
+      Array.from(closeModal).forEach(close => {
+        close.onclick = function() {
+          diagnosisModal.style.display = "none";
+          programModal.style.display = "none";
+        }
+      });
+
+      window.onclick = function(event) {
+        if (event.target == diagnosisModal || event.target == programModal) {
+          diagnosisModal.style.display = "none";
+          programModal.style.display = "none";
+        }
+      }
+    });
+  </script>
+</body>
+</html>

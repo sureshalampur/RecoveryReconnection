@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Skill Development - Recovery Reconnection Platform</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+  }
+  .dashboard-container {
+    background: rgb(120, 209, 126);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  .dashboard-header h1 {
+    margin: 0;
+  }
+  .dashboard-header h1 a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+  .dashboard-header h1 a img {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 80px;
+    height: auto;
+  }
+  .dashboard-header nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .dashboard-header nav a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .container {
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  .header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+  .header h1 {
+    margin: 0;
+    font-size: 2rem;
+    color: #333;
+  }
+  .search-bar {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 0;
+  }
+  .search-bar input[type="text"] {
+    padding: 0.5rem 2.5rem 0.5rem 1rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    outline: none;
+    width: 300px;
+    background: url('search.jpg') no-repeat scroll 10px center;
+    background-size: 1rem;
+    padding-left: 35px;
+  }
+  .search-bar button {
+    display: none;
+  }
+  .course-listing {
+    margin-bottom: 2rem;
+  }
+  .course-item {
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  .course-item:last-child {
+    border-bottom: none;
+  }
+  .course-item h3 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: #333;
+  }
+  .course-item p {
+    margin: 0.5rem 0;
+    color: #666;
+  }
+  .course-item button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  .course-item button:hover {
+    background-color: #218838;
+  }
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+  .modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+    max-width: 600px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  #enroll-button {
+    display: block;
+    margin: 1rem auto 0;
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+  }
+  #enroll-button:hover {
+    background-color: #0056b3;
+  }
+  .enrolled-courses {
+    margin-top: 3rem;
+  }
+</style>
+</head>
+<body>
+  <div class="dashboard-container">
+    <header class="dashboard-header">
+      <h1><a href="index.html"><img src="Logo.jpg" alt="Logo" />Homepage</a></h1>
+      <nav>
+        <a href="myprofile.html">My Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </header>
+  </div>
+
+  <div class="container">
+    <div class="header">
+      <h1>List of Available Skills</h1>
+      <div class="search-bar">
+        <input type="text" id="course-search" placeholder="Search Courses..">
+      </div>
+    </div>
+    <div class="course-listing" id="course-listing">
+      <div class="course-item" data-course-title="Web Development">
+        <h3>Web Development</h3>
+        <p>Description: Learn HTML, CSS, JavaScript, and popular frameworks like React and Angular.</p>
+        <button class="view-button" data-course-id="1">View Course</button>
+      </div>
+      <div class="course-item" data-course-title="Data Science">
+        <h3>Data Science</h3>
+        <p>Description: Learn data analysis, machine learning, and data visualization with Python.</p>
+        <button class="view-button" data-course-id="2">View Course</button>
+      </div>
+      <div class="course-item" data-course-title="Graphic Design">
+        <h3>Graphic Design</h3>
+        <p>Description: Learn design principles, tools like Adobe Photoshop and Illustrator, and create stunning graphics.</p>
+        <button class="view-button" data-course-id="3">View Course</button>
+      </div>
+      <div class="course-item" data-course-title="React Development">
+        <h3>React Development</h3>
+        <p>Description: Master React.js and build dynamic single-page applications.</p>
+        <button class="view-button" data-course-id="4">View Course</button>
+      </div>
+      <div class="course-item" data-course-title="Angular Development">
+        <h3>Angular Development</h3>
+        <p>Description: Learn Angular framework to create robust and scalable web applications.</p>
+        <button class="view-button" data-course-id="5">View Course</button>
+      </div>
+      <div class="course-item" data-course-title="Node.js Development">
+        <h3>Node.js Development</h3>
+        <p>Description: Learn back-end development with Node.js to create server-side applications.</p>
+        <button class="view-button" data-course-id="6">View Course</button>
+      </div>
+    </div>
+    <div class="enrolled-courses" id="enrolled-courses" style="display: none;">
+      <h2>Enrolled Courses</h2>
+      <!-- Enrolled courses will be displayed here -->
+    </div>
+  </div>
+
+  <!-- The Modal -->
+  <div id="course-modal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2 id="course-title"></h2>
+      <p id="course-description"></p>
+      <div id="course-content"></div>
+      <button id="enroll-button">Enroll</button>
+      <p id="enroll-message" style="display: none; color: green;">Successfully enrolled in the course!</p>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const courseItems = document.querySelectorAll('.course-item');
+      const modal = document.getElementById('course-modal');
+      const closeModal = document.getElementsByClassName('close')[0];
+      const courseTitle = document.getElementById('course-title');
+      const courseDescription = document.getElementById('course-description');
+      const courseContent = document.getElementById('course-content');
+      const enrollButton = document.getElementById('enroll-button');
+      const enrollMessage = document.getElementById('enroll-message');
+      const searchInput = document.getElementById('course-search');
+      const enrolledCoursesSection = document.getElementById('enrolled-courses');
+
+      const courses = [
+        {
+          id: 1,
+          title: 'Web Development',
+          description: 'Learn HTML, CSS, JavaScript, and popular frameworks like React and Angular.',
+          content: `
+            <p>This web development course provides comprehensive training in front-end development, focusing on building and styling dynamic, responsive user interfaces. It covers essential technologies such as HTML, CSS, and JavaScript, and delves into popular frameworks like React and Angular to enhance functionality and user experience.</p>
+            <p>The course also includes lessons on version control with Git and design principles using tools like Adobe XD and Figma. By the end of the course, you will be equipped with the skills to create visually appealing and interactive web applications, from initial design to final deployment.</p>
+          `
+        },
+        {
+          id: 2,
+          title: 'Data Science',
+          description: 'Learn data analysis, machine learning, and data visualization with Python.',
+          content: `
+            <p>This data science course covers the essential techniques and tools needed for data analysis, machine learning, and data visualization. You will learn how to use Python for data manipulation, statistical analysis, and creating predictive models.</p>
+            <p>The course includes practical exercises using popular libraries such as NumPy, Pandas, Scikit-learn, and Matplotlib. You will also work on real-world projects to apply your skills and build a strong portfolio.</p>
+          `
+        },
+        {
+          id: 3,
+          title: 'Graphic Design',
+          description: 'Learn design principles, tools like Adobe Photoshop and Illustrator, and create stunning graphics.',
+          content: `
+            <p>This graphic design course covers fundamental design principles and provides hands-on training with industry-standard tools like Adobe Photoshop and Illustrator. You will learn how to create visually compelling graphics for various media.</p>
+            <p>The course includes projects that challenge your creativity and enhance your technical skills, preparing you for a successful career in graphic design.</p>
+          `
+        },
+        {
+          id: 4,
+          title: 'React Development',
+          description: 'Master React.js and build dynamic single-page applications.',
+          content: `
+            <p>This React development course covers the fundamentals of React, including component-based architecture, state management, and hooks. You will learn how to build dynamic, interactive web applications using React and its ecosystem.</p>
+            <p>The course includes practical exercises and projects to apply your skills and create real-world applications.</p>
+          `
+        },
+        {
+          id: 5,
+          title: 'Angular Development',
+          description: 'Learn Angular framework to create robust and scalable web applications.',
+          content: `
+            <p>This Angular development course provides comprehensive training on the Angular framework. You will learn how to build dynamic and scalable web applications using Angular's powerful features such as components, directives, and services.</p>
+            <p>The course includes practical exercises and projects to solidify your understanding and skills in Angular development.</p>
+          `
+        },
+        {
+          id: 6,
+          title: 'Node.js Development',
+          description: 'Learn back-end development with Node.js to create server-side applications.',
+          content: `
+            <p>This Node.js development course covers the fundamentals of server-side development using Node.js. You will learn how to build scalable and efficient server-side applications using Node.js, Express, and MongoDB.</p>
+            <p>The course includes practical exercises and projects to apply your skills and create real-world server-side applications.</p>
+          `
+        }
+      ];
+
+      courseItems.forEach(item => {
+        item.querySelector('.view-button').addEventListener('click', () => {
+          const courseId = item.querySelector('.view-button').getAttribute('data-course-id');
+          const course = courses.find(c => c.id == courseId);
+
+          courseTitle.innerHTML = course.title;
+          courseDescription.innerHTML = course.description;
+          courseContent.innerHTML = course.content;
+          modal.style.display = 'block';
+        });
+      });
+
+      closeModal.onclick = function() {
+        modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+        if (event.target == modal) {
+          modal.style.display = "none";
+        }
+      }
+
+      enrollButton.addEventListener('click', () => {
+        const course = {
+          title: courseTitle.innerText,
+          description: courseDescription.innerText
+        };
+
+        const enrolledCourseItem = document.createElement('div');
+        enrolledCourseItem.classList.add('course-item');
+        enrolledCourseItem.innerHTML = `
+          <h3>${course.title}</h3>
+          <p>${course.description}</p>
+        `;
+        enrolledCoursesSection.appendChild(enrolledCourseItem);
+        enrolledCoursesSection.style.display = 'block';
+
+        enrollMessage.style.display = 'block';
+        setTimeout(() => {
+          enrollMessage.style.display = 'none';
+          modal.style.display = 'none';
+        }, 3000);
+      });
+
+      searchInput.addEventListener('input', () => {
+        const searchText = searchInput.value.toLowerCase();
+        courseItems.forEach(item => {
+          const courseTitle = item.getAttribute('data-course-title').toLowerCase();
+          if (courseTitle.includes(searchText)) {
+            item.style.display = '';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+  </script>
+</body>
+</html>

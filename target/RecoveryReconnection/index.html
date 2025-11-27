@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Homepage - Recovery_Reconnection</title>
+<style>
+  body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #ffffff;
+  }
+  .homepage-container {
+    background: rgb(120, 209, 126);
+    backdrop-filter: blur(10px);
+    width: 80%;
+    max-width: 1200px;
+    margin: 2rem auto;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  .homepage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    margin-bottom: 1rem;
+  }
+  .homepage-header h1 {
+    margin: 0;
+  }
+  .homepage-header h1 a {
+    text-decoration: none;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+  }
+  .homepage-header h1 a img {
+    margin-left: 10px;
+    margin-right: 20px;
+    width: 80px;
+    height: auto;
+  }
+  .homepage-header nav a {
+    text-decoration: none;
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.2);
+    transition: background 0.3s ease;
+  }
+  .homepage-header nav a:hover {
+    background: rgba(255, 255, 255, 0.35);
+  }
+  .homepage-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+  }
+  .card {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 5px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.25);
+    transition: transform 0.3s ease;
+  }
+  .card:hover {
+    transform: translateY(-10px);
+  }
+  .card h2 {
+    margin: 0 0 1rem 0;
+  }
+  .card img {
+    width: 90%;
+    height: auto;
+    border-radius: 5px;
+  }
+  .card p {
+    margin: 1rem 0;
+  }
+</style>
+</head>
+<body>
+  <div class="homepage-container">
+    <header class="homepage-header">
+      <h1><a href="index.html"><img src="Logo.jpg" alt="Logo" />Homepage</a></h1>
+      <nav>
+        <a href="myprofile.html">My Profile</a>
+        <a href="login.html">Logout</a>
+      </nav>
+    </header>
+    <section class="homepage-content">
+      <div class="card">
+        <h2>Diagnosis</h2>
+        <a href="diagnosis.html">
+        <img src="Diagnosis.jpg" alt="DiagnosisS" />
+        </a>
+      </div>
+      <div class="card">
+        <h2>Skill Development</h2>
+        <a href="Skilldevelopment.html">
+        <img src="Skilldevelopment.jpg" alt="Skilldevelopment" />
+        </a>
+      </div>
+      <div class="card">
+        <h2>Mentor</h2>
+        <a href="Mentor.html">
+        <img src="Mentor.jpg" alt="Mentorship" />
+        </a>
+      </div>
+      <div class="card">
+        <h2>Job Application</h2>
+        <a href="Jobapplication.html">
+        <img src="Jobplacement.jpg" alt="Jobplacement" />
+        </a>
+      </div>
+      
+    </section>
+  </div>
+</body>
+</html>

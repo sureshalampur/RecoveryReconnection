@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.recovery</groupId>
+    <artifactId>RecoveryReconnection</artifactId>
+    <packaging>war</packaging>
+    <version>1.0.0</version>
+    <name>RecoveryReconnection</name>
+    <url>http://maven.apache.org</url>
+
+    <properties>
+        <!-- Java 17 (Amazon Corretto) -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <!-- change this to your DockerHub/org name if you use Docker -->
+        <docker.image.prefix>yourdockeruser</docker.image.prefix>
+
+        <!-- REPLACE PUBLIC_IP after you create the EC2 with SonarQube on port 9000 -->
+        <sonar.host.url>http://PUBLIC_IP:9000/</sonar.host.url>
+    </properties>
+
+    <dependencies>
+        <!-- Test dependency (you can remove if you don't write tests yet) -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <!-- Deploy WAR to Nexus (same server, different repos for snapshot & release) -->
+    <distributionManagement>
+        <snapshotRepository>
+            <id>nexusRepo</id>
+            <!-- REPLACE PUBLIC_IP and repo name with your real Nexus snapshot repo -->
+            <url>http://PUBLIC_IP:8081/repository/recovery-snapshots/</url>
+        </snapshotRepository>
+
+        <repository>
+            <id>nexusRepo</id>
+            <!-- REPLACE PUBLIC_IP and repo name with your real Nexus release repo -->
+            <url>http://PUBLIC_IP:8081/repository/recovery-releases/</url>
+        </repository>
+    </distributionManagement>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>maven1</id>
+            <name>Maven Central</name>
+            <url>https://repo1.maven.org/maven2</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <finalName>RecoveryReconnection</finalName>
+
+        <plugins>
+            <!-- Compiler plugin for Java 17 (optional but explicit) -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <source>17</source>
+                    <target>17</target>
+                </configuration>
+            </plugin>
+
+            <!-- WAR plugin: use src/main/webapp -->
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.4.0</version>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
+                    <warSourceDirectory>src/main/webapp</warSourceDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
