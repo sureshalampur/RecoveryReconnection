@@ -1,27 +1,10 @@
-# -------- Stage 1: Build the application --------
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+FROM httpd:2.4
 
-WORKDIR /app
+# Remove default Apache website
+RUN rm -rf /usr/local/apache2/htdocs/*
 
-# Copy project files
-COPY pom.xml .
-COPY src ./src
+# Copy your webapp files into Apache server directory
+COPY src/main/webapp/ /usr/local/apache2/htdocs/
 
-# Build the WAR file
-RUN mvn clean package -DskipTests
-
-
-# -------- Stage 2: Run the application on Tomcat --------
-FROM tomcat:10.1-jdk17
-
-# Remove default apps
-RUN rm -rf /usr/local/tomcat/webapps/*
-
-# Copy WAR from build stage
-COPY --from=build /app/target/*.war /usr/local/tomcat/webapps/ROOT.war
-
-# Expose Tomcat port
-EXPOSE 8080
-
-# Start Tomcat
-CMD ["catalina.sh", "run"]
+# Expose Apache port
+EXPOSE 80
